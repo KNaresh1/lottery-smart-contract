@@ -56,7 +56,7 @@ This code is to create a proveably random smart contract lottery.
 26. Write scripts to Deploy Raffle conntract that can run on any network based on the network config. Eg. Sepolia, local network - anvil
 27. Write a HelperConfig that would return the active network config on which the Raffle contract can be run
 28. The Ineractions.s.slo script can be used to create & fund subscription, add consumer whichi is required by VRF
-29. Use forge install ChainAccelOrg/foundry-devops - custom tool that can get most recently deployed Raffle contract, and as a consumer for VRF to receive random number
+29. Use forge install ChainAccelOrg/foundry-devops --no-commit - custom tool that can get most recently deployed Raffle contract, and as a consumer for VRF to receive random number
 30. forge coverage --report debug > coverage
 31. Write fuzz tests, test emitted events which can be required in some cases
 32. 
