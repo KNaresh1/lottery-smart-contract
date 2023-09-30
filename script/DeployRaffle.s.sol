@@ -29,14 +29,18 @@ contract DeployRaffle is Script {
 
             // Create Subscription
             CreateSubscription subscription = new CreateSubscription();
-            subscriptionId = subscription.createSubscription(vrfCoordinator);
+            subscriptionId = subscription.createSubscription(
+                vrfCoordinator,
+                deployerKey
+            );
 
             // Fund it
             FundSubscription fundSubscription = new FundSubscription();
             fundSubscription.fundSubscription(
                 vrfCoordinator,
                 subscriptionId,
-                linkToken
+                linkToken,
+                deployerKey
             );
         }
 

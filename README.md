@@ -59,4 +59,6 @@ This code is to create a proveably random smart contract lottery.
 29. Use forge install ChainAccelOrg/foundry-devops --no-commit - custom tool that can get most recently deployed Raffle contract, and as a consumer for VRF to receive random number
 30. forge coverage --report debug > coverage
 31. Write fuzz tests, test emitted events which can be required in some cases
-32. 
+32. Pass deployerKey to vm.startBroadcast() so that the tests pass when running with --fork-url
+33. Create Makefile and add all required commands to make life easy to build, test, deploy on local/testnet blockchain
+34. Need to create subscription and fund with link in chainlink and have the link balance in wallet as well in order to deploy this contract in sepolia/actual testnet

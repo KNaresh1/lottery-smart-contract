@@ -12,17 +12,18 @@ contract CreateSubscription is Script {
     // We only need this when we are creating subscription from command line
     function createSubscriptionUsingConfig() public returns (uint64) {
         HelperConfig helperConfig = new HelperConfig();
-        (, , address vrfCoordinator, , , , , ) = helperConfig
+        (, , address vrfCoordinator, , , , , uint256 deployerKey) = helperConfig
             .activeNetworkConfig();
-        return createSubscription(vrfCoordinator);
+        return createSubscription(vrfCoordinator, deployerKey);
     }
 
     function createSubscription(
-        address vrfCoordinator
+        address vrfCoordinator,
+        uint256 deployerKey
     ) public returns (uint64) {
         console.log("Creating subscription on chainid...: ", block.chainid);
 
-        vm.startBroadcast();
+        vm.startBroadcast(deployerKey);
         uint64 subscriptionId = VRFCoordinatorV2Mock(vrfCoordinator)
             .createSubscription();
         vm.stopBroadcast();
@@ -51,15 +52,22 @@ contract FundSubscription is Script {
             uint64 subscriptionId,
             ,
             address linkToken,
-
+            uint256 deployerKey
         ) = helperConfig.activeNetworkConfig();
-        return fundSubscription(vrfCoordinator, subscriptionId, linkToken);
+        return
+            fundSubscription(
+                vrfCoordinator,
+                subscriptionId,
+                linkToken,
+                deployerKey
+            );
     }
 
     function fundSubscription(
         address vrfCoordinator,
         uint64 subscriptionId,
-        address linkToken
+        address linkToken,
+        uint256 deployerKey
     ) public {
         console.log("Creating subscription id...: ", subscriptionId);
         console.log("Using vrfCoordinator...: ", vrfCoordinator);
@@ -67,7 +75,7 @@ contract FundSubscription is Script {
 
         // fundSubscription behaves differently on local anvil chain, so fundSubscription will be called this way
         if (block.chainid == 31337) {
-            vm.startBroadcast();
+            vm.startBroadcast(deployerKey);
             VRFCoordinatorV2Mock(vrfCoordinator).fundSubscription(
                 subscriptionId,
                 FUND_AMOUNT
