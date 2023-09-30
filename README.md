@@ -62,3 +62,4 @@ This code is to create a proveably random smart contract lottery.
 32. Pass deployerKey to vm.startBroadcast() so that the tests pass when running with --fork-url
 33. Create Makefile and add all required commands to make life easy to build, test, deploy on local/testnet blockchain
 34. Need to create subscription and fund with link in chainlink and have the link balance in wallet as well in order to deploy this contract in sepolia/actual testnet
+35. Go to automation chainlink and register new Upkeep in order to draw the lottery at set interval
